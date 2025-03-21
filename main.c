@@ -9,18 +9,15 @@ void rearrangeArray(float arr[], int n) {
         } else if (arr[negIndex] < 0) {
             negIndex--;
         } else {
-            if (arr[posIndex] < 0 && arr[negIndex] >= 0) {
-                float temp = arr[posIndex];
-                arr[posIndex] = arr[negIndex];
-                arr[negIndex] = temp;
-                posIndex++;
-                negIndex--;
-            } else if (arr[posIndex] == 0 && arr[negIndex] == 0) {
-                negIndex--;
-            }
+            float temp = arr[posIndex];
+            arr[posIndex] = arr[negIndex];
+            arr[negIndex] = temp;
+            posIndex++;
+            negIndex--;
         }
     }
 
+    // Заповнюємо решту масиву нулями
     int zeroIndex = posIndex;
     while (zeroIndex <= negIndex) {
         arr[zeroIndex++] = 0;
