@@ -1,26 +1,25 @@
 #include <stdio.h>
 
 void rearrangeArray(float arr[], int n) {
-    int posIndex = 0, negIndex = n - 1;
+    int left = 0;
+    int right = n - 1;
+    int i = 0;         
 
-    while (posIndex <= negIndex) {
-        if (arr[posIndex] > 0) {
-            posIndex++;
-        } else if (arr[negIndex] < 0) {
-            negIndex--;
+    while (i <= right) {
+        if (arr[i] > 0) {
+            float temp = arr[left];
+            arr[left] = arr[i];
+            arr[i] = temp;
+            left++;
+            i++;
+        } else if (arr[i] < 0) {
+            float temp = arr[right];
+            arr[right] = arr[i];
+            arr[i] = temp;
+            right--;
         } else {
-            float temp = arr[posIndex];
-            arr[posIndex] = arr[negIndex];
-            arr[negIndex] = temp;
-            posIndex++;
-            negIndex--;
+            i++;
         }
-    }
-
-    // Заповнюємо решту масиву нулями
-    int zeroIndex = posIndex;
-    while (zeroIndex <= negIndex) {
-        arr[zeroIndex++] = 0;
     }
 }
 
@@ -35,12 +34,12 @@ int main() {
     float arr[] = {3.5, -2.1, 0.0, -5.6, 4.2, 0.0, 1.3, -3.8};
     int n = sizeof(arr) / sizeof(arr[0]);
 
-    printf("Original array:\n");
+    printf("Оригінальний масив:\n");
     printArray(arr, n);
 
     rearrangeArray(arr, n);
 
-    printf("Rearranged array:\n");
+    printf("Оновлений масив:\n");
     printArray(arr, n);
 
     return 0;
